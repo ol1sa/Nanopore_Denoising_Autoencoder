@@ -1,1 +1,1 @@
-Jupyter notebooks for the nanopore autoencoder project.
+Jupyter notebook for the nanopore autoencoder project.
