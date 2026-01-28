@@ -32,25 +32,21 @@ Models are evaluated on a held-out test set under two conditions:
 
 This allows direct comparison of fidelity vs robustness.
 
-**Results**
+| Condition | Baseline AE MSE | Denoising AE MSE |
+|--------|-----------------|------------------|
+| Clean input | **0.00111** | 0.00228 |
+| Masked input | 0.08572 | **0.07958** |
 
-| Evaluation Condition | Baseline AE MSE | Denoising AE MSE |
-|---------------------|-----------------|------------------|
-| Clean input         | 0.00111         | 0.00228          |
-| Masked input (p=0.05, block=64) | 0.08572 | **0.07958** |
+The denoising autoencoder achieves a **~7% reduction in MSE under structured signal dropout**, indicating improved robustness to missing or corrupted signal segments. However, this comes at the cost of reduced reconstruction fidelity on clean inputs.
 
-The denoising autoencoder improves reconstruction under signal dropout (**~7% reduction in MSE**), at the cost of reduced accuracy on clean inputs.
+### Interpretation
 
-**Key Conclusion**
+Training with corrupted inputs introduces a bias that degrades performance on clean signals, but improves generalisation when the signal contains dropouts. This reflects a **robustness–fidelity trade-off**: the denoising model sacrifices peak accuracy in order to better handle structured noise and missing data, which are common in nanopore sequencing.
 
-Introducing a denoising objective improves robustness to structured signal corruption but introduces bias that degrades clean-signal reconstruction, highlighting a robustness–fidelity trade-off relevant to nanopore sequencing pipelines.
 
 **Repository Structure**
 
 - `notebooks/` – step-by-step experiments
-- `src/` – reusable training and evaluation code
-- `figures/` – reconstruction plots
-- `models/` – trained weights (optional)
 
 **Running the Code**
 
